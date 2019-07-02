@@ -1,4 +1,7 @@
 const db = require('../src/database');
+
+const quantity = process.argv[2] || 1;
+
 (async () => {
     let countInserts = 0;
     for (let index = 0; index < quantity; index++) {
