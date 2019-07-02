@@ -17,7 +17,7 @@ const client = () => {
 const set = async (key, value) => {
     const redisClient = await client();
     return new Promise((resolve, reject) => {
-        redisClient.setex(key, 3600, JSON.stringify(value), (err) => {
+        redisClient.setex(key, 43200, JSON.stringify(value), (err) => {
 
             if (err) {
                 redisClient.quit();

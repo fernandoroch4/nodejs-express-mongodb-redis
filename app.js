@@ -1,10 +1,12 @@
 const fetch = require('cross-fetch');
+
+const quantity = process.argv[2] || 1;
  
 (async () => {
-  console.time('db');
+  console.time('timetoresponse');
   try {
-    for (let index = 0; index < 8000; index++) {
-        const url = `http://localhost:3000/api/v1/shortnames/${index}`;
+    for (let index = 0; index < quantity; index++) {
+        const url = `http://localhost:3000/api/v1/units/${index}`;
         const res = await fetch(url);
         
         if (res.status >= 400) {
@@ -14,5 +16,5 @@ const fetch = require('cross-fetch');
   } catch (err) {
     console.error(err);
   }
-  console.timeEnd('db');
+  console.timeEnd('timetoresponse');
 })();
