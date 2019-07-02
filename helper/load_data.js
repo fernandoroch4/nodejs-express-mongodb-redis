@@ -1,8 +1,9 @@
-const cache = require('./cache');
+const db = require('../src/database');
 (async () => {
-    for (let index = 0; index < 8000; index++) {
-        const record = {
-            shortname: 'shortname' + index,
+    let countInserts = 0;
+    for (let index = 0; index < quantity; index++) {
+        const document = {
+            shortname: `shortname-${index}`,
             disciplina: 'disciplina ' + index,
             ordem_unidade: 'ordem_unidade ' + index,
             unidade: 'unidade ' + index,
@@ -15,12 +16,16 @@ const cache = require('./cache');
             tag_relevancia: 'tag_relevancia ' + index,
             tag_tipo_conteudo: 'tag_tipo_conteudo ' + index,
             pontos_ac: 'pontos_ac ' + index,
-            tempo_estudo: 'tempo_estudo ' + index
+            tempo_estudo: 'tempo_estudo ' + index,
+            link: 'http://localhost',
+            abc: [ 'abc', 'def', 'ghi', 123, 456, 678 ],
+            def: 123
         };
         try {
-            await cache.set(record.shortname, record);
+            if (await db.insert(document)) countInserts += 1;    
         } catch (error) {
-            console.log(error);
-        }
+            console.log(error);   
+        }        
     }
+    console.log(`${countInserts} documents inserts`);
 })();
